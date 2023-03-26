@@ -64,11 +64,15 @@
             let button = $("<button></button>")
                 .text(option)
                 .css({
-                    "width": "200",
+                    "width": "300px",
                     "background-color": "#fce4d1",
                     "border": "2px solid #fd7e14",
                     "border-radius": "5px",
-                    "margin": "0 1px 0 1px"
+                    "margin": "0 0 5px 0",
+                    "display": "block",
+                    "margin": "auto",
+                    "margin-bottom": "5px",
+                    "width": "50%"
                 })
                 .click(function () { handleAnswer(question, option); });
             $(questionAnswers).append(button);
