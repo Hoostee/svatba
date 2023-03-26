@@ -8,13 +8,13 @@
 
     let questionList = [
         {
-            questionText: "Kolik zbývá v současnosti Markétce zubů?",
+            questionText: "Kolik zbývá Markétce v současnosti zubů?",
             options: ["5", "25", "32", "45"],
             correctAnswer: "25"
         },
         {
             questionText: "Které z následujících psisek je největší basťoch?",
-            options: ["Kouďáček", "Fíbí", "Skřetisko", "Ginuška"],
+            options: ["Kouďáček", "Fíbí", "Kačenka", "Ginuška"],
             correctAnswer: "Fíbí"
         },
         {
@@ -29,13 +29,13 @@
         },
         {
             questionText: "Kde Václavíček požádal Makrelíčka o ruku?",
-            options: ["Sokolov", "Geirangerfjord", "Geyrangerfjord", "Korsika"],
+            options: ["Geirangerfjord", "Sokolov", "Geyrangerfjord", "Gayrangerfjord"],
             correctAnswer: "Geirangerfjord"
         }
     ];
 
-    let correctAnswersToAssesment = [
-        "Jsi blbeček a vůbec nás neznáš, ale přesto Tě zveme na",
+    let correctAnswersCountToAssesment = [
+        "Vůbec nás neznáš :( ale přesto Tě zveme na",
         "Moc nás teda neznáš, ale přesto Tě zveme na",
         "Nic moc, je tu prostor pro zlepšení, ale přesto Tě zveme na",
         "To ujde! A tak Tě zveme na",
@@ -63,6 +63,13 @@
         for (const option of question.options) {
             let button = $("<button></button>")
                 .text(option)
+                .css({
+                    "width": "200",
+                    "background-color": "#fce4d1",
+                    "border": "2px solid #fd7e14",
+                    "border-radius": "5px",
+                    "margin": "0 1px 0 1px"
+                })
                 .click(function () { handleAnswer(question, option); });
             $(questionAnswers).append(button);
         }
@@ -82,10 +89,17 @@
             if (++currentQuestionIndex < questionList.length) {
                 $(questionAnswers).append($("<button></button>")
                     .text("Další otázka")
+                    .css({
+                        "background-color": "#E47A2E", "color": "rgb(255, 255, 255)", "font-weight": "bold", "border": "2px solid #ffd9be", "border-radius": "10px", "width": "200px", "height": "50px" 
+                    })
                     .click(() => { showQuestion(questionList[currentQuestionIndex]); }));
             } else {
                 $(questionAnswers).append($("<button></button>")
                     .text("Pokračovat")
+                    .css({
+                        "background-color": "#E47A2E", "color": "rgb(255, 255, 255)", "font-weight": "bold", "border": "2px solid #ffd9be", "border-radius": "10px", "width": "200px", "height": "50px" 
+                    })
+
                     .click(allQuestionsAnswered));
             }
             
@@ -116,9 +130,11 @@
         $(resultContainer).show();
 
         $(resultLabel).text(correctAnswers + " / " + questionList.length);
-        $(assessmentLabel).text(correctAnswersToAssesment[correctAnswers]);
+        $(assessmentLabel).text(correctAnswersCountToAssesment[correctAnswers]);
         $("body").css("background-color", "white");
         console.log(correctAnswers + "/" + questionList.length);
+
+        document.cookie = "questionsCompleted=true";
     }
 
     function showQuestions() {
